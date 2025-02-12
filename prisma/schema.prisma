@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model cinnamonStock {
+  stockID      String     @id @db.VarChar(50)
+  batchCode    String     @unique(map: "batchCode") @db.VarChar(50)
+  type         String     @db.VarChar(50)
+  quantity     Decimal    @db.Decimal(10, 2)
+  supplierID   String?    @db.VarChar(50)
+  receivedDate DateTime   @db.Date
+  suppliers    suppliers? @relation(fields: [supplierID], references: [supplierID], onDelete: NoAction, onUpdate: NoAction, map: "cinnamonStock_ibfk_1")
+
+  @@index([supplierID], map: "supplierID")
+}
+
+model employees {
+  employeeID    String   @id @db.VarChar(50)
+  firstName     String   @db.VarChar(100)
+  lastName      String   @db.VarChar(100)
+  role          String   @db.VarChar(100)
+  gender        String   @db.VarChar(10)
+  joinedDate    DateTime @db.Date
+  dob           DateTime @db.Date
+  addressLine01 String   @db.VarChar(255)
+  addressLine02 String?  @db.VarChar(255)
+  addressLine03 String?  @db.VarChar(255)
+  addressLine04 String?  @db.VarChar(255)
+  addressLine05 String?  @db.VarChar(255)
+  postalCode    String   @db.VarChar(20)
+  contactNo     String   @db.VarChar(20)
+  email         String   @unique(map: "email") @db.VarChar(100)
+  logs          logs[]
+}
+
+model logs {
+  logID      String     @id @db.VarChar(50)
+  employeeID String?    @db.VarChar(50)
+  logsDes    String?    @db.VarChar(100)
+  logDate    DateTime   @db.Date
+  employees  employees? @relation(fields: [employeeID], references: [employeeID], onDelete: NoAction, onUpdate: NoAction, map: "logs_ibfk_1")
+
+  @@index([employeeID], map: "employeeID")
+}
+
+model suppliers {
+  supplierID    String          @id @db.VarChar(50)
+  firstName     String          @db.VarChar(100)
+  lastName      String          @db.VarChar(100)
+  gender        String          @db.VarChar(10)
+  addressLine01 String          @db.VarChar(255)
+  postalCode    String          @db.VarChar(20)
+  contactNo     String          @db.VarChar(20)
+  email         String          @unique(map: "email") @db.VarChar(100)
+  cinnamonStock cinnamonStock[]
+}
+
+model userAdmin {
+  email    String         @id @db.VarChar(100)
+  password String         @unique(map: "password") @db.VarChar(255)
+  Role     userAdmin_Role
+}
+
+enum userAdmin_Role {
+  Admin
+  Manager
+  Employee
+}
