@@ -1,9 +1,9 @@
 
 export default class CinnamonStock {
-    stockId!: string;
+    stockID!: string;
     batchCode!: string;
     type!: string;
     quantity!: number;
-    supplierId!: string;
+    supplierID!: string;
     receivedDate!: Date | string;
 }
