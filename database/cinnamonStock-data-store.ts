@@ -1,0 +1,82 @@
+import { PrismaClient } from "@prisma/client";
+import CinnamonStock from "../model/CinnamonStock";
+
+
+const prisma = new PrismaClient();
+
+
+export async function addCinnamonStock(cinnamonStock:CinnamonStock) {
+    try {
+        return await prisma.cinnamonStock.create({
+            data: {
+                stockID:cinnamonStock.stockID,
+                batchCode:cinnamonStock.batchCode,
+                type:cinnamonStock.type,
+                quantity:cinnamonStock.quantity,
+                supplierID:cinnamonStock.supplierID,
+                receivedDate:cinnamonStock.receivedDate,
+            }
+        });
+    } catch (error) {
+        console.error(`Error adding CinnamonStock: ${error}`);
+        throw error;
+    }
+}
+
+
+
+export async function deleteCinnamonStock(id: string) {
+    try{
+        return await prisma.cinnamonStock.delete({
+            where : {
+                stockID: id
+            }
+        });
+    } catch (error){
+        console.error(`Error deleting CinnamonStock: ${error}`);
+        throw error;
+    }
+}
+
+export async function updateCinnamonStock(id: string, cinnamonStock: CinnamonStock) {
+    try {
+        return await prisma.cinnamonStock.update({
+            where: {
+                stockID: id
+            },
+            data: {
+                stockID:cinnamonStock.stockID,
+                batchCode:cinnamonStock.batchCode,
+                type:cinnamonStock.type,
+                quantity:cinnamonStock.quantity,
+                supplierID:cinnamonStock.supplierID,
+                receivedDate:cinnamonStock.receivedDate,
+            }
+        });
+    }catch (error){
+        console.error(`Error updating CinnamonStock: ${error}`);
+        throw error;
+    }
+}
+
+export async function getCinnamonStock() {
+    try {
+        return await prisma.cinnamonStock.findMany();
+    } catch (error) {
+        console.error(`Error getting CinnamonStock: ${error}`);
+        throw error;
+    }
+}
+
+export async function getCinnamonStockById(id: string) {
+    try {
+        return await prisma.cinnamonStock.findUnique({
+            where: {
+                stockID: id
+            }
+        });
+    } catch (error) {
+        console.error(`Error getting CinnamonStock: ${error}`);
+        throw error;
+    }
+}
