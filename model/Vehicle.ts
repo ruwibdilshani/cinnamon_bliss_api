@@ -1,8 +1,8 @@
 
 export default class Vehicle {
-    vehicleId!: string;
+    vehicleID!: string;
     licensePlate!: string;
     model!: string;
     capacity!:string;
-    assignedDriver!: string;
+    employeeID!: string;
 }

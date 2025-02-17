@@ -1,7 +1,7 @@
 
 export default class Log {
-    logId!: string;
-    employeeId!: string;
+    logID!: string;
+    employeeID!: string;
     logsDes!: string;
     logDate!: Date | string;
 }

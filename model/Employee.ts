@@ -1,6 +1,6 @@
 
 export class Employee {
-    employeeId!: string;
+    employeeID!: string;
     firstName!: string;
     lastName!: string;
     role!: 'ADMIN' | 'Manager' | "Employee";
