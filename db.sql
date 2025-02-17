@@ -5,7 +5,7 @@ USE cinnamonBliss;
 CREATE TABLE userAdmin (
                            email VARCHAR(100) PRIMARY KEY,
                            password VARCHAR(255) UNIQUE NOT NULL,
-                           Role ENUM('Admin', 'Manager', 'Employee') NOT NULL
+                           role VARCHAR(50)  NOT NULL
 );
 
 CREATE TABLE employees (
@@ -53,8 +53,8 @@ CREATE TABLE vehicles (
                           licensePlate VARCHAR(20) UNIQUE NOT NULL,
                           model VARCHAR(50),
                           capacity DECIMAL(10,2),
-                          assignedDriver VARCHAR(50),
-                          FOREIGN KEY (assigned_driver) REFERENCES employees(employeeID)
+                          employeeID VARCHAR(50) NOT NULL,
+                          FOREIGN KEY (employeeID) REFERENCES employees(employeeID)
 );
 
 CREATE TABLE logs (
@@ -64,3 +64,4 @@ CREATE TABLE logs (
                       logDate DATE NOT NULL,
                       FOREIGN KEY (employeeID) REFERENCES employees(employeeID)
 );
+
