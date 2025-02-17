@@ -20,22 +20,23 @@ model cinnamonStock {
 }
 
 model employees {
-  employeeID    String   @id @db.VarChar(50)
-  firstName     String   @db.VarChar(100)
-  lastName      String   @db.VarChar(100)
-  role          String   @db.VarChar(100)
-  gender        String   @db.VarChar(10)
-  joinedDate    DateTime @db.Date
-  dob           DateTime @db.Date
-  addressLine01 String   @db.VarChar(255)
-  addressLine02 String?  @db.VarChar(255)
-  addressLine03 String?  @db.VarChar(255)
-  addressLine04 String?  @db.VarChar(255)
-  addressLine05 String?  @db.VarChar(255)
-  postalCode    String   @db.VarChar(20)
-  contactNo     String   @db.VarChar(20)
-  email         String   @unique(map: "email") @db.VarChar(100)
+  employeeID    String     @id @db.VarChar(50)
+  firstName     String     @db.VarChar(100)
+  lastName      String     @db.VarChar(100)
+  role          String     @db.VarChar(100)
+  gender        String     @db.VarChar(10)
+  joinedDate    DateTime   @db.Date
+  dob           DateTime   @db.Date
+  addressLine01 String     @db.VarChar(255)
+  addressLine02 String?    @db.VarChar(255)
+  addressLine03 String?    @db.VarChar(255)
+  addressLine04 String?    @db.VarChar(255)
+  addressLine05 String?    @db.VarChar(255)
+  postalCode    String     @db.VarChar(20)
+  contactNo     String     @db.VarChar(20)
+  email         String     @unique(map: "email") @db.VarChar(100)
   logs          logs[]
+  vehicles      vehicles[]
 }
 
 model logs {
@@ -61,13 +62,18 @@ model suppliers {
 }
 
 model userAdmin {
-  email    String         @id @db.VarChar(100)
-  password String         @unique(map: "password") @db.VarChar(255)
-  Role     userAdmin_Role
+  email    String @id @db.VarChar(100)
+  password String @unique(map: "password") @db.VarChar(255)
+  role     String @db.VarChar(50)
 }
 
-enum userAdmin_Role {
-  Admin
-  Manager
-  Employee
+model vehicles {
+  vehicleID    String?   @db.VarChar(50)
+  licensePlate String    @unique(map: "licensePlate") @db.VarChar(20)
+  model        String?   @db.VarChar(50)
+  capacity     Decimal?  @db.Decimal(10, 2)
+  employeeID   String    @db.VarChar(50)
+  employees    employees @relation(fields: [employeeID], references: [employeeID], onDelete: NoAction, onUpdate: NoAction, map: "vehicles_ibfk_1")
+
+  @@index([employeeID], map: "employeeID")
 }
