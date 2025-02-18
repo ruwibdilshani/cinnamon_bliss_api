@@ -9,14 +9,16 @@ datasource db {
 
 model cinnamonStock {
   stockID      String     @id @db.VarChar(50)
-  batchCode    String     @unique(map: "batchCode") @db.VarChar(50)
+  batchCode    String     @db.VarChar(50)
   type         String     @db.VarChar(50)
   quantity     Decimal    @db.Decimal(10, 2)
   supplierID   String?    @db.VarChar(50)
   receivedDate DateTime   @db.Date
   suppliers    suppliers? @relation(fields: [supplierID], references: [supplierID], onDelete: NoAction, onUpdate: NoAction, map: "cinnamonStock_ibfk_1")
+  product      product    @relation(fields: [batchCode], references: [batchCode], onDelete: NoAction, onUpdate: NoAction, map: "cinnamonStock_ibfk_2")
 
   @@index([supplierID], map: "supplierID")
+  @@index([batchCode], map: "batchCode")
 }
 
 model employees {
@@ -42,11 +44,14 @@ model employees {
 model logs {
   logID      String     @id @db.VarChar(50)
   employeeID String?    @db.VarChar(50)
+  batchCode  String?    @db.VarChar(50)
   logsDes    String?    @db.VarChar(100)
   logDate    DateTime   @db.Date
   employees  employees? @relation(fields: [employeeID], references: [employeeID], onDelete: NoAction, onUpdate: NoAction, map: "logs_ibfk_1")
+  product    product?   @relation(fields: [batchCode], references: [batchCode], onDelete: NoAction, onUpdate: NoAction, map: "logs_ibfk_2")
 
   @@index([employeeID], map: "employeeID")
+  @@index([batchCode], map: "batchCode")
 }
 
 model suppliers {
@@ -70,10 +75,21 @@ model userAdmin {
 model vehicles {
   vehicleID    String?   @db.VarChar(50)
   licensePlate String    @unique(map: "licensePlate") @db.VarChar(20)
+  available    Boolean
   model        String?   @db.VarChar(50)
   capacity     Decimal?  @db.Decimal(10, 2)
   employeeID   String    @db.VarChar(50)
   employees    employees @relation(fields: [employeeID], references: [employeeID], onDelete: NoAction, onUpdate: NoAction, map: "vehicles_ibfk_1")
 
   @@index([employeeID], map: "employeeID")
+}
+
+model product {
+  batchCode     String          @id @db.VarChar(50)
+  quality       String          @db.VarChar(50)
+  name          String          @db.VarChar(50)
+  price         Decimal         @db.Decimal(10, 2)
+  observedImage String?         @db.Text
+  cinnamonStock cinnamonStock[]
+  logs          logs[]
 }

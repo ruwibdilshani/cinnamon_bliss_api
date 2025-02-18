@@ -13,6 +13,7 @@ export async function addVehicle(vehicle:Vehicle) {
                 model:vehicle.model,
                 capacity:vehicle.capacity,
                 employeeID:vehicle.employeeID,
+                available:vehicle.available,
 
             }
         });
@@ -46,7 +47,8 @@ export async function updateVehicle(id: string, vehicle: Vehicle) {
                 licensePlate: vehicle.licensePlate,
                 model: vehicle.model,
                 capacity: vehicle.capacity,
-                employeeID: vehicle.employeeID
+                employeeID: vehicle.employeeID,
+                available:vehicle.available
             }
         });
     }catch (error) {

@@ -4,5 +4,6 @@ export default class Vehicle {
     licensePlate!: string;
     model!: string;
     capacity!:string;
+    available! : boolean;
     employeeID!: string;
 }

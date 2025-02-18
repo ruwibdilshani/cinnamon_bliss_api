@@ -11,6 +11,7 @@ export async function addlogs(log:Log) {
                 employeeID:log.employeeID,
                 logsDes: log.logsDes,
                 logDate: log.logDate,
+                batchCode:log.batchCode,
             }
         });
     }catch (error) {
@@ -39,10 +40,10 @@ export async function updateLogs(id: string, log: Log) {
                 logID: id
             },
             data: {
-                logID:log.logID,
                 employeeID:log.employeeID,
                 logsDes: log.logsDes,
                 logDate: log.logDate,
+                batchCode:log.batchCode,
             }
         });
     }catch (error) {

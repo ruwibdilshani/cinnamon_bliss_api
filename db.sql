@@ -37,20 +37,30 @@ CREATE TABLE suppliers (
                            email VARCHAR(100) UNIQUE NOT NULL
 );
 
+CREATE TABLE product(
+    batchCode VARCHAR(50) PRIMARY KEY ,
+    quality VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL ,
+    price DECIMAL(10,2) NOT NULL,
+    observedImage TEXT NULL
+);
+
 CREATE TABLE cinnamonStock (
                                stockID VARCHAR(50) PRIMARY KEY,
-                               batchCode VARCHAR(50) UNIQUE NOT NULL,
+                               batchCode VARCHAR(50) NOT NULL,
                                type VARCHAR(50) NOT NULL,
                                quantity DECIMAL(10,2) NOT NULL,
                                supplierID VARCHAR(50),
                                receivedDate DATE NOT NULL,
-                               FOREIGN KEY (supplierID) REFERENCES suppliers(supplierID)
+                               FOREIGN KEY (supplierID) REFERENCES suppliers(supplierID),
+                                   FOREIGN KEY (batchCode) REFERENCES product(batchCode)
 
 );
 
 CREATE TABLE vehicles (
                           vehicleID  VARCHAR(50),
                           licensePlate VARCHAR(20) UNIQUE NOT NULL,
+                            available BOOLEAN NOT NULL,
                           model VARCHAR(50),
                           capacity DECIMAL(10,2),
                           employeeID VARCHAR(50) NOT NULL,
@@ -59,9 +69,11 @@ CREATE TABLE vehicles (
 
 CREATE TABLE logs (
                       logID VARCHAR(50) PRIMARY KEY,
-                      employeeID VARCHAR(50),
+                      employeeID VARCHAR(50) NULL,
+                      batchCode VARCHAR(50) NULL,
                       logsDes VARCHAR(100),
                       logDate DATE NOT NULL,
-                      FOREIGN KEY (employeeID) REFERENCES employees(employeeID)
+                      FOREIGN KEY (employeeID) REFERENCES employees(employeeID),
+                      FOREIGN KEY (batchCode) REFERENCES product(batchCode)
 );
 
