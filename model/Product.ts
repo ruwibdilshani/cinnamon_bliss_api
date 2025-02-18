@@ -1,6 +1,6 @@
 
 
-export class Product {
+export default class Product {
     batchCode! : string;
     name! : string;
     price! : number;
