@@ -5,6 +5,7 @@ import {PrismaClient} from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function addVehicle(vehicle:Vehicle) {
+    console.log("API BLNN",vehicle);
     try {
         return await  prisma.vehicles.create({
             data: {
@@ -44,7 +45,6 @@ export async function updateVehicle(id: string, vehicle: Vehicle) {
             },
             data: {
                 vehicleID: vehicle.vehicleID,
-                licensePlate: vehicle.licensePlate,
                 model: vehicle.model,
                 capacity: vehicle.capacity,
                 employeeID: vehicle.employeeID,

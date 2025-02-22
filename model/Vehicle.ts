@@ -6,4 +6,4 @@ export default class Vehicle {
     capacity!:string;
     available! : boolean;
     employeeID!: string;
-}
+}           

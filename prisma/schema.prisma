@@ -73,13 +73,13 @@ model userAdmin {
 }
 
 model vehicles {
-  vehicleID    String?   @db.VarChar(50)
-  licensePlate String    @unique(map: "licensePlate") @db.VarChar(20)
+  vehicleID    String?    @db.VarChar(50)
+  licensePlate String     @unique(map: "licensePlate") @db.VarChar(20)
   available    Boolean
-  model        String?   @db.VarChar(50)
-  capacity     Decimal?  @db.Decimal(10, 2)
-  employeeID   String    @db.VarChar(50)
-  employees    employees @relation(fields: [employeeID], references: [employeeID], onDelete: NoAction, onUpdate: NoAction, map: "vehicles_ibfk_1")
+  model        String?    @db.VarChar(50)
+  capacity     Decimal?   @db.Decimal(10, 2)
+  employeeID   String?    @db.VarChar(50)
+  employees    employees? @relation(fields: [employeeID], references: [employeeID], onDelete: NoAction, onUpdate: NoAction, map: "vehicles_ibfk_1")
 
   @@index([employeeID], map: "employeeID")
 }

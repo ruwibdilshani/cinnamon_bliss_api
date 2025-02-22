@@ -63,7 +63,7 @@ CREATE TABLE vehicles (
                             available BOOLEAN NOT NULL,
                           model VARCHAR(50),
                           capacity DECIMAL(10,2),
-                          employeeID VARCHAR(50) NOT NULL,
+                          employeeID VARCHAR(50)  NULL,
                           FOREIGN KEY (employeeID) REFERENCES employees(employeeID)
 );
 
