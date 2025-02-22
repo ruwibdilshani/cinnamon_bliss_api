@@ -7,89 +7,79 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model cinnamonStock {
-  stockID      String     @id @db.VarChar(50)
-  batchCode    String     @db.VarChar(50)
-  type         String     @db.VarChar(50)
-  quantity     Decimal    @db.Decimal(10, 2)
-  supplierID   String?    @db.VarChar(50)
-  receivedDate DateTime   @db.Date
-  suppliers    suppliers? @relation(fields: [supplierID], references: [supplierID], onDelete: NoAction, onUpdate: NoAction, map: "cinnamonStock_ibfk_1")
-  product      product    @relation(fields: [batchCode], references: [batchCode], onDelete: NoAction, onUpdate: NoAction, map: "cinnamonStock_ibfk_2")
-
-  @@index([supplierID], map: "supplierID")
-  @@index([batchCode], map: "batchCode")
-}
-
 model employees {
-  employeeID    String     @id @db.VarChar(50)
-  firstName     String     @db.VarChar(100)
-  lastName      String     @db.VarChar(100)
-  role          String     @db.VarChar(100)
-  gender        String     @db.VarChar(10)
-  joinedDate    DateTime   @db.Date
-  dob           DateTime   @db.Date
-  addressLine01 String     @db.VarChar(255)
-  addressLine02 String?    @db.VarChar(255)
-  addressLine03 String?    @db.VarChar(255)
-  addressLine04 String?    @db.VarChar(255)
-  addressLine05 String?    @db.VarChar(255)
-  postalCode    String     @db.VarChar(20)
-  contactNo     String     @db.VarChar(20)
-  email         String     @unique(map: "email") @db.VarChar(100)
-  logs          logs[]
-  vehicles      vehicles[]
+  employeeID    String   @id @db.VarChar(50)
+  firstName     String   @db.VarChar(100)
+  lastName      String   @db.VarChar(100)
+  role          String   @db.VarChar(100)
+  gender        String   @db.VarChar(10)
+  joinedDate    DateTime @db.Date
+  dob           DateTime @db.Date
+  addressLine01 String   @db.VarChar(255)
+  addressLine02 String?  @db.VarChar(255)
+  addressLine03 String?  @db.VarChar(255)
+  addressLine04 String?  @db.VarChar(255)
+  addressLine05 String?  @db.VarChar(255)
+  postalCode    String   @db.VarChar(20)
+  contactNo     String   @db.VarChar(20)
+  email         String   @unique(map: "email") @db.VarChar(100)
 }
 
 model logs {
-  logID      String     @id @db.VarChar(50)
-  employeeID String?    @db.VarChar(50)
-  batchCode  String?    @db.VarChar(50)
-  logsDes    String?    @db.VarChar(100)
-  logDate    DateTime   @db.Date
-  employees  employees? @relation(fields: [employeeID], references: [employeeID], onDelete: NoAction, onUpdate: NoAction, map: "logs_ibfk_1")
-  product    product?   @relation(fields: [batchCode], references: [batchCode], onDelete: NoAction, onUpdate: NoAction, map: "logs_ibfk_2")
+  logID      String   @id @db.VarChar(50)
+  employeeID String?  @db.VarChar(50)
+  batchCode  String?  @db.VarChar(50)
+  logsDes    String?  @db.VarChar(100)
+  logDate    DateTime @db.Date
 
   @@index([employeeID], map: "employeeID")
   @@index([batchCode], map: "batchCode")
 }
 
 model suppliers {
-  supplierID    String          @id @db.VarChar(50)
-  firstName     String          @db.VarChar(100)
-  lastName      String          @db.VarChar(100)
-  gender        String          @db.VarChar(10)
-  addressLine01 String          @db.VarChar(255)
-  postalCode    String          @db.VarChar(20)
-  contactNo     String          @db.VarChar(20)
-  email         String          @unique(map: "email") @db.VarChar(100)
-  cinnamonStock cinnamonStock[]
-}
-
-model userAdmin {
-  email    String @id @db.VarChar(100)
-  password String @unique(map: "password") @db.VarChar(255)
-  role     String @db.VarChar(50)
+  supplierID    String @id @db.VarChar(50)
+  firstName     String @db.VarChar(100)
+  lastName      String @db.VarChar(100)
+  gender        String @db.VarChar(10)
+  addressLine01 String @db.VarChar(255)
+  postalCode    String @db.VarChar(20)
+  contactNo     String @db.VarChar(20)
+  email         String @unique(map: "email") @db.VarChar(100)
 }
 
 model vehicles {
-  vehicleID    String?    @db.VarChar(50)
-  licensePlate String     @unique(map: "licensePlate") @db.VarChar(20)
+  vehicleID    String? @db.VarChar(50)
+  licensePlate String  @unique(map: "licensePlate") @db.VarChar(20)
   available    Boolean
-  model        String?    @db.VarChar(50)
-  capacity     Decimal?   @db.Decimal(10, 2)
-  employeeID   String?    @db.VarChar(50)
-  employees    employees? @relation(fields: [employeeID], references: [employeeID], onDelete: NoAction, onUpdate: NoAction, map: "vehicles_ibfk_1")
+  model        String? @db.VarChar(50)
+  capacity     String? @db.VarChar(50)
+  employeeID   String? @db.VarChar(50)
 
   @@index([employeeID], map: "employeeID")
 }
 
 model product {
-  batchCode     String          @id @db.VarChar(50)
-  quality       String          @db.VarChar(50)
-  name          String          @db.VarChar(50)
-  price         Decimal         @db.Decimal(10, 2)
-  observedImage String?         @db.Text
-  cinnamonStock cinnamonStock[]
-  logs          logs[]
+  batchCode     String  @id @db.VarChar(50)
+  quality       String  @db.VarChar(50)
+  name          String  @db.VarChar(50)
+  price         Decimal @db.Decimal(10, 2)
+  observedImage String? @db.Text
+}
+
+model cinnamonstock {
+  stockID      String   @id @db.VarChar(50)
+  batchCode    String   @db.VarChar(50)
+  type         String   @db.VarChar(50)
+  quantity     Decimal  @db.Decimal(10, 2)
+  supplierID   String?  @db.VarChar(50)
+  receivedDate DateTime @db.Date
+
+  @@index([batchCode], map: "batchCode")
+  @@index([supplierID], map: "supplierID")
+}
+
+model useradmin {
+  email    String @id @db.VarChar(100)
+  password String @unique(map: "password") @db.VarChar(255)
+  role     String @db.VarChar(50)
 }

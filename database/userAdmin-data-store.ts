@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function addUserAdmin(userAdmin:UserAdmin) {
     try{
-        return await prisma.userAdmin.create({
+        return await prisma.useradmin.create({
             data: {
                 email: userAdmin.email,
                 password: userAdmin.password,
@@ -22,7 +22,7 @@ export async function addUserAdmin(userAdmin:UserAdmin) {
 
 export async function deleteUserAdmin(email: string) {
     try{
-        return await prisma.userAdmin.delete({
+        return await prisma.useradmin.delete({
             where:{
                 email: email
             }
@@ -35,7 +35,7 @@ export async function deleteUserAdmin(email: string) {
 
 export async function updateUserAdmin(email: string, userAdmin: UserAdmin) {
     try{
-        return await prisma.userAdmin.update({
+        return await prisma.useradmin.update({
             where: {
                 email: email
             },
@@ -52,7 +52,7 @@ export async function updateUserAdmin(email: string, userAdmin: UserAdmin) {
 
 export async function getUserAdmin(email:string) {
     try{
-        return await prisma.userAdmin.findUnique({
+        return await prisma.useradmin.findUnique({
             where:{
                 email: email
             }

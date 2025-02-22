@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function addCinnamonStock(cinnamonStock:CinnamonStock) {
     try {
-        return await prisma.cinnamonStock.create({
+        return await prisma.cinnamonstock.create({
             data: {
                 stockID:cinnamonStock.stockID,
                 batchCode:cinnamonStock.batchCode,
@@ -27,7 +27,7 @@ export async function addCinnamonStock(cinnamonStock:CinnamonStock) {
 
 export async function deleteCinnamonStock(id: string) {
     try{
-        return await prisma.cinnamonStock.delete({
+        return await prisma.cinnamonstock.delete({
             where : {
                 stockID: id
             }
@@ -40,7 +40,7 @@ export async function deleteCinnamonStock(id: string) {
 
 export async function updateCinnamonStock(id: string, cinnamonStock: CinnamonStock) {
     try {
-        return await prisma.cinnamonStock.update({
+        return await prisma.cinnamonstock.update({
             where: {
                 stockID: id
             },
@@ -61,7 +61,7 @@ export async function updateCinnamonStock(id: string, cinnamonStock: CinnamonSto
 
 export async function getCinnamonStock() {
     try {
-        return await prisma.cinnamonStock.findMany();
+        return await prisma.cinnamonstock.findMany();
     } catch (error) {
         console.error(`Error getting CinnamonStock: ${error}`);
         throw error;
@@ -70,7 +70,7 @@ export async function getCinnamonStock() {
 
 export async function getCinnamonStockById(id: string) {
     try {
-        return await prisma.cinnamonStock.findUnique({
+        return await prisma.cinnamonstock.findUnique({
             where: {
                 stockID: id
             }

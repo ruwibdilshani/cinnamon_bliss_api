@@ -15,10 +15,10 @@ router.post("/add", async (req, res) => {
     }
 });
 
-router.delete("/remove/:vehicleID", async (req, res) => {
-    const vehicleID: string = req.params.vehicleID;
+router.delete("/remove/:licensePlate", async (req, res) => {
+    const licensePlate: string = req.params.licensePlate;
     try{
-        const deletedVehicle = await deleteVehicle(vehicleID);
+        const deletedVehicle = await deleteVehicle(licensePlate);
         res.status(200).json(deletedVehicle);
     }catch (error) {
         console.log(`Error deleting vehicle: ${error}`);
@@ -26,11 +26,11 @@ router.delete("/remove/:vehicleID", async (req, res) => {
     }
 });
 
-router.put("/update/:vehicleID", async (req, res) => {
-    const vehicleID: string = req.params.vehicleID;
+router.put("/update/:licensePlate", async (req, res) => {
+    const licensePlate: string = req.params.licensePlate;
     const vehicle: Vehicle = req.body as Vehicle;
     try{
-        const updatedVehicle = await updateVehicle(vehicleID, vehicle);
+        const updatedVehicle = await updateVehicle(licensePlate, vehicle);
         res.status(200).json(updatedVehicle);
     }catch (error) {
         console.log(`Error updating vehicle: ${error}`);

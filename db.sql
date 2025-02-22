@@ -62,7 +62,7 @@ CREATE TABLE vehicles (
                           licensePlate VARCHAR(20) UNIQUE NOT NULL,
                             available BOOLEAN NOT NULL,
                           model VARCHAR(50),
-                          capacity DECIMAL(10,2),
+                          capacity VARCHAR(50),
                           employeeID VARCHAR(50)  NULL,
                           FOREIGN KEY (employeeID) REFERENCES employees(employeeID)
 );
