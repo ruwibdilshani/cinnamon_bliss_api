@@ -1,7 +1,7 @@
 import express from "express";
 import employeeRoutes  from "./routes/employee-routes";
 import supplierRoutes from "./routes/supplier-routes";
-import userAdminRoutes from "./routes/userAdmin-routes";
+import userAdminRoutes, {authenticateToken} from "./routes/userAdmin-routes";
 import cinnamonStockRoutes from "./routes/cinnamonStock-routes";
 import vehicleRoutes from "./routes/vehicle-routes";
 import dotenv from "dotenv";
@@ -23,9 +23,9 @@ app.use(cors({
 console.log("Loaded SECRET_KEY:", process.env.SECRET_KEY);
 dotenv.config();
 
-//
-// app.use('/auth', userAdminRoutes);
-// app.use(authenticateToken);
+
+app.use('/auth', userAdminRoutes);
+app.use(authenticateToken);
 
 
 app.use('/employees', employeeRoutes);
