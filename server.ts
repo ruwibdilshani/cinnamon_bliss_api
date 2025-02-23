@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import cors from 'cors';
 
 import logRoutes from "./routes/log-routes";
+import productRoutes from "./routes/product-routes";
 const app = express();
 
 app.use(express.json());// })
@@ -34,6 +35,8 @@ app.use('/suppliers',supplierRoutes);
 app.use('/userAdmin',userAdminRoutes);
 
 app.use('/cinnamonStock',cinnamonStockRoutes);
+
+app.use('/products',productRoutes);
 
 app.use('/log',logRoutes);
 

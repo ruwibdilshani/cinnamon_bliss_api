@@ -13,7 +13,7 @@ router.post("/add",async (req, res) => {
     const cinnamonStock:CinnamonStock = req.body as CinnamonStock;
     try {
         const addedRawMaterialStock = await addCinnamonStock(cinnamonStock);
-        res.status(201).json(cinnamonStock);
+        res.status(201).json(addedRawMaterialStock);
     } catch (error) {
         console.log(`Error adding cinnamonStock: ${error}`);
         res.status(500).send("Error adding cinnamonStock");
