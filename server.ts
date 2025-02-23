@@ -3,20 +3,29 @@ import employeeRoutes  from "./routes/employee-routes";
 import supplierRoutes from "./routes/supplier-routes";
 import userAdminRoutes from "./routes/userAdmin-routes";
 import cinnamonStockRoutes from "./routes/cinnamonStock-routes";
-import logRoutes from "./routes/log-routes";
 import vehicleRoutes from "./routes/vehicle-routes";
+import dotenv from "dotenv";
+import cors from 'cors';
 
+import logRoutes from "./routes/log-routes";
 const app = express();
 
-app.use('/',(req,res,next)=>{
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type');
+app.use(express.json());// })
 
-    next();
-})
+app.use(cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}));
 
-app.use(express.json());
+console.log("Loaded SECRET_KEY:", process.env.SECRET_KEY);
+dotenv.config();
+
+//
+// app.use('/auth', userAdminRoutes);
+// app.use(authenticateToken);
+
 
 app.use('/employees', employeeRoutes);
 

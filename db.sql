@@ -23,7 +23,7 @@ CREATE TABLE employees (
                            addressLine05 VARCHAR(255),
                            postalCode VARCHAR(20) NOT NULL,
                            contactNo VARCHAR(20) NOT NULL,
-                           email VARCHAR(100) UNIQUE NOT NULL
+                           email VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE suppliers (
@@ -34,7 +34,7 @@ CREATE TABLE suppliers (
                            addressLine01 VARCHAR(255) NOT NULL,
                            postalCode VARCHAR(20) NOT NULL,
                            contactNo VARCHAR(20) NOT NULL,
-                           email VARCHAR(100) UNIQUE NOT NULL
+                           email VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE product(
@@ -42,18 +42,18 @@ CREATE TABLE product(
     quality VARCHAR(50) NOT NULL,
     name VARCHAR(50) NOT NULL ,
     price DECIMAL(10,2) NOT NULL,
-    observedImage TEXT NULL
+    observedImage LONGTEXT NULL
 );
 
 CREATE TABLE cinnamonStock (
                                stockID VARCHAR(50) PRIMARY KEY,
                                batchCode VARCHAR(50) NOT NULL,
-                               type VARCHAR(50) NOT NULL,
+                               total DECIMAL(10,2) NOT NULL,
                                quantity DECIMAL(10,2) NOT NULL,
                                supplierID VARCHAR(50),
                                receivedDate DATE NOT NULL,
                                FOREIGN KEY (supplierID) REFERENCES suppliers(supplierID),
-                                   FOREIGN KEY (batchCode) REFERENCES product(batchCode)
+                                FOREIGN KEY (batchCode) REFERENCES product(batchCode)
 
 );
 
@@ -69,6 +69,7 @@ CREATE TABLE vehicles (
 
 CREATE TABLE logs (
                       logID VARCHAR(50) PRIMARY KEY,
+                      logImage LONGTEXT NULL,
                       employeeID VARCHAR(50) NULL,
                       batchCode VARCHAR(50) NULL,
                       logsDes VARCHAR(100),
