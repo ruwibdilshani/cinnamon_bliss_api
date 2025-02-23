@@ -5,4 +5,5 @@ export default class Log {
     logsDes!: string;
     batchCode! : string;
     logDate!: Date | string;
+    logImage : string;
 }

@@ -11,10 +11,10 @@ export async function addCinnamonStock(cinnamonStock:CinnamonStock) {
             data: {
                 stockID:cinnamonStock.stockID,
                 batchCode:cinnamonStock.batchCode,
-                type:cinnamonStock.type,
+                total:cinnamonStock.total,
                 quantity:cinnamonStock.quantity,
                 supplierID:cinnamonStock.supplierID,
-                receivedDate:cinnamonStock.receivedDate,
+                receivedDate:new Date(cinnamonStock.receivedDate),
             }
         });
     } catch (error) {
@@ -47,10 +47,10 @@ export async function updateCinnamonStock(id: string, cinnamonStock: CinnamonSto
             data: {
                 stockID:cinnamonStock.stockID,
                 batchCode:cinnamonStock.batchCode,
-                type:cinnamonStock.type,
+                total:cinnamonStock.total,
                 quantity:cinnamonStock.quantity,
                 supplierID:cinnamonStock.supplierID,
-                receivedDate:cinnamonStock.receivedDate,
+                receivedDate:new Date(cinnamonStock.receivedDate),
             }
         });
     }catch (error){

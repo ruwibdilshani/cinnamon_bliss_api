@@ -8,10 +8,13 @@ export async function addlogs(log:Log) {
         return await prisma.logs.create({
             data: {
                 logID:log.logID,
-                employeeID:log.employeeID,
+                employeeID:log.employeeID || null,
                 logsDes: log.logsDes,
-                logDate: log.logDate,
-                batchCode:log.batchCode,
+                batchCode:log.batchCode || null,
+                logDate: new Date(),
+                logImage:log.logImage || null
+
+
             }
         });
     }catch (error) {
@@ -42,8 +45,9 @@ export async function updateLogs(id: string, log: Log) {
             data: {
                 employeeID:log.employeeID,
                 logsDes: log.logsDes,
-                logDate: log.logDate,
+                logDate: new Date(),
                 batchCode:log.batchCode,
+                logImage:log.logImage
             }
         });
     }catch (error) {

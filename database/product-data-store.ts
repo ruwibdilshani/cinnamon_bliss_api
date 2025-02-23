@@ -9,8 +9,6 @@ export async function addProduct(product:Product) {
 
     try{
 
-       const Base64 = require("js-base64").Base64;
-       const decoded = Base64.decode(product.observedImage);
 
         return await prisma.product.create({
             data: {
@@ -18,7 +16,7 @@ export async function addProduct(product:Product) {
                 name : product.name,
                 price:product.price,
                 quality:product.quality,
-                observedImage : decoded
+                observedImage : product.observedImage || null
             }
         });
     }catch (error) {
@@ -42,8 +40,7 @@ export async function deleteProduct(batchCode: string) {
 
 export async function updateProduct(batchCode: string, product: Product) {
     try{
-        const Base64 = require("js-base64").Base64;
-        const decoded = Base64.decode(product.observedImage);
+
 
         return await prisma.product.update({
             where: {
@@ -53,7 +50,7 @@ export async function updateProduct(batchCode: string, product: Product) {
                 name : product.name,
                 price:product.price,
                 quality : product.quality,
-                observedImage : decoded
+                observedImage : product.observedImage
             }
         });
     }catch (error) {
