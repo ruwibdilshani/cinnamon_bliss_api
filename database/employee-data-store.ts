@@ -25,7 +25,8 @@ export async function addEmployee(employee: Employee) {
             }
         });    } catch (error) {
         console.error(`Error adding supplier: ${error}`);
-        throw error;
+        return error
+
     }
 }
 
