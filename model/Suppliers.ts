@@ -4,7 +4,7 @@ export default class Supplier {
     firstName! : string;
     lastName! : string;
     gender! : string;
-    addressLine1!: string;
+    addressLine01!: string;
     postalCode!: string;
     contactNo!: string;
     email!: string;

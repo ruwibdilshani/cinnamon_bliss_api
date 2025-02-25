@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export async function createUser(userAdmin : UserAdmin) {
     const hashedPassword = await bcrypt.hash(userAdmin.password, 10);
 
-    const addedUser = await prisma.useradmin.create({
+    const addedUser = await prisma.userAdmin.create({
         data: {
             email : userAdmin.email,
             password: hashedPassword,
@@ -18,7 +18,7 @@ export async function createUser(userAdmin : UserAdmin) {
 }
 
 export async function verifyUserCredentials(verifyUser : UserAdmin) {
-    const user : any | null = await prisma.useradmin.findUnique({
+    const user : any | null = await prisma.userAdmin.findUnique({
         where : {
             email:verifyUser.email,
         }

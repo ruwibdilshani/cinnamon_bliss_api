@@ -11,7 +11,7 @@ export async function addSupplier(supplier:Supplier){
                 firstName :supplier.firstName,
                 lastName :supplier.lastName,
                 gender :supplier.gender,
-                addressLine01 :supplier.addressLine1,
+                addressLine01 :supplier.addressLine01,
                 postalCode :supplier.postalCode,
                 contactNo : supplier.contactNo,
                 email : supplier.email
@@ -46,7 +46,7 @@ export async function updateSupplier(id: string, supplier: Supplier ) {
                 firstName :supplier.firstName,
                 lastName :supplier.lastName,
                 gender :supplier.gender,
-                addressLine01 :supplier.addressLine1,
+                addressLine01 :supplier.addressLine01,
                 postalCode :supplier.postalCode,
                 contactNo : supplier.contactNo,
                 email : supplier.email
