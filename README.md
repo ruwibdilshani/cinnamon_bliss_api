@@ -49,10 +49,12 @@ npm run dev
 ```
 The server will run at `http://localhost:5000`.
 
-## API Endpoints
+
+## API Documentation
 
 #### https://documenter.getpostman.com/view/36641894/2sAYdfqrHE
 
+## API Endpoints
 ### Authentication
 - `POST /api/auth/register` - Register a new user
 - `POST /api/auth/login` - Authenticate and get a token
